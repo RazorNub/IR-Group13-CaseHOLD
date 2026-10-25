@@ -68,7 +68,8 @@ cfg, test, index, bm25, tfidf, dense = load_everything()
 
 st.title("Legal holding search on CaseHOLD")
 st.caption(f"{len(test.corpus):,} holdings from the CaseHOLD test split. "
-           "The query is the passage that cites a case; the results are candidate holdings.")
+           "The query is the passage that cites a case; the results are candidate holdings. "
+           "Each result shows its document id (doc N), the holding's position in the collection.")
 
 with st.sidebar:
     st.header("Query")
@@ -77,7 +78,8 @@ with st.sidebar:
     mode = st.radio("Source", ["CaseHOLD test query", "Type my own"],
                     index=1 if "text" in qp else 0)
     dense_label = st.selectbox("Dense model", list(dense))
-    k = st.slider("Results per model", 3, 20, 10)
+    per_page = st.slider("Results per page", 3, 20, 10)
+    page = st.number_input("Page", 1, 50, int(st.query_params.get("page", 1)))
 
 gold = None
 if mode == "CaseHOLD test query":
@@ -92,7 +94,11 @@ else:
                         "severance damages"), height=120)
 
 if text.strip():
+    # fetch everything up to the end of the chosen page, then show only that page
+    k = page * per_page
+    start = k - per_page
     results, tokens = search(text, cfg, bm25, tfidf, dense, dense_label, k)
+    st.markdown(f"**Page {page}** (ranks {start + 1} to {k})")
     st.markdown("**Query terms after preprocessing:** " + ", ".join(sorted(set(tokens))[:40]))
     cols = st.columns(len(results))
     for col, (name, hits) in zip(cols, results.items()):
@@ -101,7 +107,9 @@ if text.strip():
             if gold is not None:
                 pos = [d for d, _ in hits].index(gold) + 1 if gold in [d for d, _ in hits] else None
                 st.caption(f"correct holding at rank {pos}" if pos else f"correct holding not in top {k}")
-            for r, (d, s) in enumerate(hits, 1):
+            for r, (d, s) in enumerate(hits[start:], start + 1):
                 tag = " **[correct]**" if d == gold else ""
                 score = f" ({s:.3f})" if s is not None else ""
-                st.markdown(f"{r}.{tag}{score} {test.corpus[d]}")
+                # `doc N` is the holding's id in the collection (0 to 13,296); the same id in
+                # different columns means the same holding was returned by both methods
+                st.markdown(f"{r}.{tag} `doc {d}`{score} {test.corpus[d]}")
