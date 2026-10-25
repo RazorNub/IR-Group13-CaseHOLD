@@ -153,10 +153,12 @@ text(s, 1.0, 2.05, 11.3, 1.9, [[("Legal Retrieval using CaseHOLD", True, NAVY)]]
 text(s, 1.0, 3.15, 11.3, 1.0, [[("Comparing TF-IDF, BM25, a Sentence Transformer and Hybrid RRF for finding "
                                   "the holding a court cites", False, GREY)]], size=22)
 rect(s, 1.0, 4.35, 5.5, 0.03, NAVY)
-text(s, 1.0, 4.6, 11, 1.6, [[("Group 13", True, BLACK)],
-                             "Vaibhav Bansal (23FE10CSE00333)",
-                             "Pranav Joshi (23FE10CSE00701)",
-                             "Ishaan Manocha (23FE10CSE00143)"], size=18, space=2)
+text(s, 1.0, 4.6, 11.5, 1.6, [[("Group 13", True, BLACK)],
+                              [("Vaibhav Bansal (23FE10CSE00333)", False, BLACK),
+                               ("    VAIBHAV.23FE10CSE00333@muj.manipal.edu", False, GREY)],
+                              [("Pranav Joshi (23FE10CSE00701)", False, BLACK),
+                               ("    Pranav.23FE10CSE00701@muj.manipal.edu", False, GREY)],
+                              "Ishaan Manocha (23FE10CSE00143)"], size=18, space=2)
 text(s, 1.0, 6.55, 11, 0.4, [[("B.Tech CSE, Semester VII · Manipal University Jaipur · 2026-27",
                                False, GREY)]], size=13)
 s.notes_slide.notes_text_frame.text = (

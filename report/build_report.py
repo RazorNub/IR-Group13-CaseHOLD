@@ -18,8 +18,9 @@ from docx_helpers import fill_table, keep_with_next, page_break_before, set_head
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 R = lambda *p: os.path.join(ROOT, *p)
 
-MEMBERS = [("Vaibhav Bansal", "23FE10CSE00333"), ("Pranav Joshi", "23FE10CSE00701"),
-           ("Ishaan Manocha", "23FE10CSE00143")]
+MEMBERS = [("Vaibhav Bansal", "23FE10CSE00333", "VAIBHAV.23FE10CSE00333@muj.manipal.edu"),
+           ("Pranav Joshi", "23FE10CSE00701", "Pranav.23FE10CSE00701@muj.manipal.edu"),
+           ("Ishaan Manocha", "23FE10CSE00143", "")]  # Ishaan's email still to be added
 
 full = pd.read_csv(R("results/test_full_pool.csv")).set_index("model")
 five = pd.read_csv(R("results/test_five_choice.csv")).set_index("model")
@@ -69,10 +70,10 @@ title = ("Comparative Performance Evaluation of TF-IDF, BM25, Sentence Transform
 set_runs(P_TITLE, [(title, True)], doc)
 
 students = Table(T_STUDENTS, doc._body)
-for row, (name, reg) in zip(students.rows[1:], MEMBERS):
-    for cell, val_ in zip(row.cells, [name, reg]):
+for row, (name, reg, email) in zip(students.rows[1:], MEMBERS):
+    for cell, val_ in zip(row.cells, [name, reg, email]):
         p = cell.paragraphs[0]
-        p.add_run(val_).font.size = Pt(12)
+        p.add_run(val_).font.size = Pt(9 if "@" in val_ else 12)
         for extra in cell.paragraphs[1:]:
             extra._p.getparent().remove(extra._p)
 for tr in students.rows[1 + len(MEMBERS):]:
