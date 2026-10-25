@@ -1,0 +1,20 @@
+{
+ "train": {
+  "queries": 45000,
+  "holdings": 50291,
+  "ctx_words": 136.3,
+  "hold_words": 26.4
+ },
+ "validation": {
+  "queries": 3900,
+  "holdings": 14138,
+  "ctx_words": 136.3,
+  "hold_words": 25.4
+ },
+ "test": {
+  "queries": 3600,
+  "holdings": 13297,
+  "ctx_words": 136.4,
+  "hold_words": 25.4
+ }
+}

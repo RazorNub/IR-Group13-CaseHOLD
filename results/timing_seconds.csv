@@ -1,0 +1,8 @@
+,seconds
+TF-IDF index,0.26
+TF-IDF search,0.57
+BM25 index,0.24
+BM25 search,0.55
+Dense encode+search,13.58
+Dense fine-tuned encode+search,12.88
+Cross-encoder re-rank top-20,198.05

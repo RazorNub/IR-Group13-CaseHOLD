@@ -1,0 +1,37 @@
+{
+  "bm25_top1_dense_not": 474,
+  "dense_top1_bm25_not": 204,
+  "both_top1": 368,
+  "neither_top10": 1571,
+  "hybrid_top1": 836,
+  "hybrid_misses": 2764,
+  "miss_top1_is_own_distractor": 0.1299,
+  "miss_top1_vs_gold_jaccard": 0.0943,
+  "note": "own_distractor = the wrong top result is one of the 4 CaseHOLD distractors chosen for that same query, i.e. a holding on the same legal issue",
+  "mrr_by_gold_length": {
+    "0-15 words": {
+      "queries": 657,
+      "BM25": 0.2128,
+      "Dense": 0.1584,
+      "Hybrid RRF (TF-IDF+BM25+Dense)": 0.2297
+    },
+    "16-25 words": {
+      "queries": 1304,
+      "BM25": 0.3201,
+      "Dense": 0.2239,
+      "Hybrid RRF (TF-IDF+BM25+Dense)": 0.3239
+    },
+    "26-40 words": {
+      "queries": 1196,
+      "BM25": 0.3573,
+      "Dense": 0.2605,
+      "Hybrid RRF (TF-IDF+BM25+Dense)": 0.3538
+    },
+    "41-1000 words": {
+      "queries": 443,
+      "BM25": 0.402,
+      "Dense": 0.3028,
+      "Hybrid RRF (TF-IDF+BM25+Dense)": 0.4131
+    }
+  }
+}
